@@ -1,0 +1,6 @@
+[submodule "pydexcom"]
+	path = pydexcom
+	url = https://github.com/gagebenne/pydexcom
+[submodule "rpi_epd2in7"]
+	path = rpi_epd2in7
+	url = git@github.com:elad661/rpi_epd2in7.git
