@@ -38,18 +38,19 @@ def main():
     display = EPD()
     display.init()
     font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 110)
+    font2 = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 30)
     image = Image.new('1', (display.height, display.width), 255)
     draw = ImageDraw.Draw(image)
     
     # Initialize Dexcom Glucose Measurement REST API
     dexcom = Dexcom(USERNAME, PASSWORD)
     
+    glucose_text_draw = ImageDraw.Draw(image)
+    glucose_text_draw.text((15, 120), "Current Glucose", font=font2, fill=0)
     while True:
         # Get current glucose data and post it!
         current_glucose_data = dexcom.get_current_glucose_reading()
         draw.text((15, 5), str(current_glucose_data.value), font=font, fill=0)
-
-
         display.smart_update(image.transpose(Image.ROTATE_270))
         # Readings are only every 15 minutes anyway
         time.sleep(140)
